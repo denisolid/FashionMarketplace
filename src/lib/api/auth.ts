@@ -4,8 +4,7 @@ import { initiateGoogleLogin } from "./google-auth";
 import type { LoginCredentials, RegisterCredentials } from "@/types/auth";
 
 const API_BASE =
-  import.meta.env.VITE_API_URL ||
-  "https://fashionmarketplace-2.onrender.com/api";
+  import.meta.env.VITE_API_URL || "https://fashionmarketplace-2.onrender.com";
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -17,7 +16,7 @@ const api = axios.create({
 
 export async function register(credentials: RegisterCredentials) {
   try {
-    const response = await api.post("/auth/register", credentials);
+    const response = await api.post("/api/auth/register", credentials);
     return response.data;
   } catch (error: any) {
     console.error("Registration error:", error.response?.data || error.message);
@@ -30,7 +29,7 @@ export async function register(credentials: RegisterCredentials) {
 
 export async function login(credentials: LoginCredentials) {
   try {
-    const response = await api.post("/auth/login", credentials);
+    const response = await api.post("/api/auth/login", credentials);
     return response.data;
   } catch (error: any) {
     console.error("Login error:", error.response?.data || error.message);
@@ -63,7 +62,7 @@ export { initiateGoogleLogin as loginWithGoogle };
 
 export async function logout() {
   try {
-    await apiClient.post("/auth/logout");
+    await apiClient.post("/api/auth/logout");
     localStorage.removeItem("token");
   } catch (error: any) {
     console.error("Logout error:", error.response?.data || error.message);
