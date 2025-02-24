@@ -3,8 +3,12 @@ import { apiClient } from "./client";
 import { initiateGoogleLogin } from "./google-auth";
 import type { LoginCredentials, RegisterCredentials } from "@/types/auth";
 
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  "https://fashionmarketplace-2.onrender.com/api";
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: API_BASE,
   headers: {
     "Content-Type": "application/json",
   },
